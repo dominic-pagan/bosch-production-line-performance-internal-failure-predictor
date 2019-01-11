@@ -33,3 +33,5 @@
  In addition to being one of the largest datasets (in terms of number of features) ever hosted on Kaggle, the ground truth for this competition is highly imbalanced. Together, these two attributes are expected to make this a challenging problem.
 
  File descriptions train_numeric.csv - the training set numeric features (this file contains the 'Response' variable) test_numeric.csv - the test set numeric features (you must predict the 'Response' for these Ids) train_categorical.csv - the training set categorical features test_categorical.csv - the test set categorical features train_date.csv - the training set date features test_date.csv - the test set date features sample_submission.csv - a sample submission file in the correct format
+
+[Dominic Pagan](https://www.ingenium-ai.com/) is the Lead [Machine Learning](https://www.ingenium-ai.com/) and [Artificial Intelligence](https://www.ingenium-ai.com/) [Developer](https://www.ingenium-ai.com/) at [Ingenium A.I.](https://www.ingenium-ai.com/) LLC. 
