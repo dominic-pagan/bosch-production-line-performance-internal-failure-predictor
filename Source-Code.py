@@ -2,7 +2,6 @@
 # coding: utf-8
 
 
-
 # train_numeric.csv -
 # train_date.csv
 
