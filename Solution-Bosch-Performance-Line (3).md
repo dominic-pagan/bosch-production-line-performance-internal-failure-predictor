@@ -1,14 +1,3 @@
-
-# Bosch Production Line Performance
-
-# Objective: Prediction of Internal Failures to reduce Manufacturing Failure
-A good chocolate soufflé is decadent, delicious, and delicate. But, it's a challenge to prepare. When you pull a disappointingly deflated dessert out of the oven, you instinctively retrace your steps to identify at what point you went wrong. Bosch, one of the world's leading manufacturing companies, has an imperative to ensure that the recipes for the production of its advanced mechanical components are of the highest quality and safety standards. Part of doing so is closely monitoring its parts as they progress through the manufacturing processes.
-
-Bosch production line
-
-Because Bosch records data at every step along its assembly lines, they have the ability to apply advanced analytics to improve these manufacturing processes. However, the intricacies of the data and complexities of the production line pose problems for current methods.
-
-In this competition, Bosch is challenging Kagglers to predict internal failures using thousands of measurements and tests made for each component along the assembly line. This would enable Bosch to bring quality products at lower costs to the end user.
 # Dataset Introduction
 
 The data for this competition represents measurements of parts as they move through Bosch's production lines. Each part has a unique Id. The goal is to predict which parts will fail quality control (represented by a 'Response' = 1).
@@ -28,38 +17,37 @@ train_date.csv - the training set date features
 test_date.csv - the test set date features
 sample_submission.csv - a sample submission file in the correct format
 
-## Road map for the USE CASE#############
-features, dates 2189 features
+### Road map for the Project: ###
+- features, dates 2189 features
 
-Large dimensional data 
+- Large dimensional data 
 
-Import the packages
+- Import the packages
 
-pandas dataframe:
-    merging the data
+- pandas dataframe:
+  - merging the data
     
-Training data : 
-    Summary Statistics
-    Preprocesing 
-    Data Imputation 
+- Training data : 
+  - Summary Statistics
+  - Preprocesing 
+  - Data Imputation 
 
-Modelling : 
-    x1 -  0, 1
+- Modelling : 
+  - x1 -  0, 1
     
-   1) Naive Bayes KDE: 
-    Decision Tree Classifer
-       2) Extra Tree classifer 
-        3) Random Forest
-        4) Grid Search CV
-        5) XGBoost
-        
-        
-        Evaluation:
-            1)which one has the best accuray(prediction)
-            2) prediction result (internal part) 
-            3)feature significance
-            4) top Features : iedentify there ditributions, correlation(density),
-            5)submit and the result/file     
+ - a Naive Bayes KDE: 
+      - Decision Tree Classifer
+        - 2) Extra Tree classifer 
+        - 3) Random Forest
+        - 4) Grid Search CV
+        - 5) XGBoost
+ 
+ - Evaluation:
+   - which one has the best accuray(prediction)
+   - prediction result (internal part) 
+   - feature significance
+   - top Features : iedentify there ditributions, correlation(density),
+   - submit and the result/file     
             
     
     
@@ -74,18 +62,19 @@ train_date.csv
 # Import the packages
 import pandas as pd
 import numpy as np 
-from sklearn import cross_validation
+from sklearn.model_selection import cross_validate
+from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.tree import *
 from sklearn.ensemble import *
-from sklearn import grid_search
+from sklearn.model_selection import GridSearchCV
 from sklearn import preprocessing
 ```
 
 
 ```python
-DataPath='C:\\Users\\Jameel shaik\\Downloads\\Dezyre\\HackerDay\\Bosch Performance line\\'
+DataPath='/Users/dominic/Downloads/'
 ```
 
 
@@ -1036,21 +1025,16 @@ dataclean.head()
 
 
 ```python
-1 column: 50% data whih is filled and 50 % are emtpy
-1) Data imbalance : Noisy, overfit,  
+### 1 column: 50% data whih is filled and 50 % are emtpy ###
+### 1) Data imbalance : Noisy, overfit, ### 
 ```
 
-
-      File "<ipython-input-11-bc56bab361fa>", line 1
-        1 column: 50% data whih is filled and 50 % are emtpy
-               ^
-    SyntaxError: invalid syntax
 
 
 
 
 ```python
-# label the encoder  ( aligning he labels in order)
+### label the encoder  ( aligning he labels in order) ###
  
 le = preprocessing.LabelEncoder()
 dataclean['Id'] = le.fit_transform(dataclean.Id)
@@ -1059,7 +1043,7 @@ dataclean['Id'] = le.fit_transform(dataclean.Id)
 
 
 ```python
-# Splitting my data into Training and testing  by ignoring ID column as its Identical column
+### Splitting my data into Training and testing  by ignoring ID column as its Identical column ###
 featurelist =  list(dataclean.columns.values)
 featurelist.remove('Id')
 featurelist.remove('Response')
@@ -1077,16 +1061,16 @@ labels_test# dependent columns
 
 
 ```python
-# 10k -- accuracy 92 % 99 %   (on sample the accuray may be higher but when we consider total amount of data we the accuray can goes down to )
+### 10k -- accuracy 92 % 99 %   (on sample the accuray may be higher but when we consider total amount of data we the accuray can goes down to ) ###
 
-# 80%   --- 89% 
+### 80%   --- 89% ###
 ```
 
 
 ```python
-#########################
-######### Naive Bayes###########
-##################################
+
+### Naive Bayes###
+
 ```
 
 
@@ -1228,9 +1212,9 @@ accuracy
 
 
 ```python
-############# 
-## Random Forest Classifier################
-#####################
+ 
+### Random Forest Classifier ###
+
 ```
 
 
@@ -1346,9 +1330,9 @@ pred
 
 
 ```python
-##################
-### Grid Search##############
-#################
+
+### Grid Search###
+
 ```
 
 
@@ -1392,7 +1376,7 @@ modeloptimal.fit(features_train, labels_train)
 
 
 ```python
-# Using this we can find the best acuracy model from the above parameter estimators
+### Using this we can find the best acuracy model from the above parameter estimators ###
 clf = modeloptimal.best_estimator_
 clf
 ```
@@ -1411,9 +1395,7 @@ accuracy
 
 
 ```python
-#######################################
-### Extra Tree Classifier################
-##################################
+### Extra Tree Classifier ###
 ```
 
 
@@ -1522,9 +1504,7 @@ accuracy
 
 
 ```python
-################################
-## xgboost ###########
-####################################
+### xgboost ###
 
 ```
 
@@ -1668,11 +1648,11 @@ from xgboost.sklearn import XGBClassifier
 
 
 ```python
-# test set 
+### test set ###
 test_numeric = pd.read_csv(Datapath+'test_numeric.csv')
 test_date = pd.read_csv(Datapath+'test_date.csv')
 data_merge = pd.merge(test_numeric, test_date, on='Id',suffixes=('num', 'date'))
-# 
+### test set ###
 
 ```
 
@@ -1860,4 +1840,4 @@ sns.heatmap(nan_neg.corr() - nan_pos.corr(), mask = triang_mask, square=True)
 ![png](output_95_1.png)
 
 
-#Hope you have enjoyed the session.. Have a great day ahead.....!!!
+### Hope you have enjoyed. Have a great day! ###
